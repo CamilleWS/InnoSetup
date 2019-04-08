@@ -27,6 +27,7 @@ SolidCompression=yes
 Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "french"; MessagesFile: "compiler:Languages\French.isl"
 
+
 [Files]
 Source: "KIT-KAT\ChromeSetup.exe"; DestDir: "{tmp}"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "KIT-KAT\vlc-3.0.6-win64.exe"; DestDir: "{tmp}"; Flags: ignoreversion recursesubdirs createallsubdirs
@@ -44,7 +45,7 @@ const
   Vlc = '{userpf}\VideoLAN\VLC\vlc.exe';
   
 /////////////////////////////////////////////////////////////////////////////////
-///////////////////////////      CHROME     /////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
 
 function CheckForChrome(): Boolean;
 var
@@ -68,7 +69,7 @@ begin
 end;
 
 /////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////   VLC   ////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
 
 function CheckForVLC(): Boolean;
 var
@@ -92,7 +93,7 @@ begin
 end;
 
 /////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////   VsCODE    /////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
 
 function CheckForVSCode(): Boolean;
 var
@@ -106,17 +107,17 @@ begin
   end
   else
   begin
-    MsgBox('Installing VSCode', mbInformation, MB_OK);
-    ExtractTemporaryFile('VSCodeSetup-ia32-1.31.1.exe');
-    VSCodeInstallerFileName := ExpandConstant('{tmp}\VSCodeSetup-ia32-1.31.1.exe');
-    Exec(VSCodeInstallerFileName, '', '', SW_SHOW, ewWaitUntilTerminated, ResultCode);
-    MsgBox('Installed VSCode', mbInformation, MB_OK);
-    Result := True;
+      MsgBox('Installing VSCode', mbInformation, MB_OK);
+      ExtractTemporaryFile('VSCodeSetup-ia32-1.31.1.exe');
+      VSCodeInstallerFileName := ExpandConstant('{tmp}\VSCodeSetup-ia32-1.31.1.exe');
+      Exec(VSCodeInstallerFileName, '', '', SW_SHOW, ewWaitUntilTerminated, ResultCode);
+      MsgBox('Installed VSCode', mbInformation, MB_OK);
+      Result := True;
   end; 
 end;
 
 /////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////  CHECK  ///////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
 
 function MyProgCheck(str: String): Boolean;
 begin
@@ -124,6 +125,7 @@ begin
     MyProgCheckResult := MsgBox('Do you want to install ' + str + '.exe ?', mbConfirmation, MB_YESNO) = idYes;
     MyProgChecked := True;
   end;
+  MyProgChecked := False;
   Result := MyProgCheckResult;
 end;
 
@@ -142,4 +144,3 @@ begin
      begin CheckForVSCode(); end;
   end;
  end;
- 
